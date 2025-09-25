@@ -32,7 +32,6 @@ const TodoInfo = () => {
   const id = params?.id as string;
   const todoId = Number(id);
 
-  console.log("TodoInfo: Component Rendered - ID from URL params:", todoId);
 
   const {
     data: todo,
@@ -42,15 +41,13 @@ const TodoInfo = () => {
   } = useQuery({
     queryKey: ["todo", todoId.toString()],
     queryFn: async () => {
-      console.log(
-        `TodoInfo: QueryFn - Initiating fetch for todo ID: ${todoId}`
-      );
+    
 
       const allLocalTodos = getTodosFromLocalStorage();
       const localTodo = allLocalTodos.find((t) => t.id === todoId);
 
       if (localTodo) {
-        console.log(`TodoInfo: Found todo ID ${todoId} in Local Storage.`);
+        // console.log(`TodoInfo: Found todo ID ${todoId} in Local Storage.`);
         
         // For locally created todos (high ID numbers), don't try API call
         if (todoId > 1000) {
